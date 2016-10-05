@@ -1,0 +1,42 @@
+﻿<!DOCTYPE>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+    <title>Operacion POST con AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
+</head>
+<body>
+	
+	
+	<div ng-app="apiApp" ng-controller="appCtrl as vm">
+		<h1>Operacion POST con AngularJS</h1>
+		
+		<section>
+			<form ng-submit="vm.enviar()">
+				Nombre: <input type="text" ng-model="vm.fdatos.nombre" /><br />
+				Edad: <input type="text" ng-model="vm.fdatos.edad" /><br />
+				<input type="submit" value="Enviar" />			
+			</form>
+		</section>	
+	</div>	
+	
+	<script type="text/javascript">
+		angular
+			.module('app', [])
+			.controller("appCtrl",['$http', controladorPrincipal]); 
+			
+		function controladorPrincipal($http) {
+			var vm = this;
+			vm.fdatos = {};
+
+			vm.enviar = function() {
+				$http.post('recibe-formulario.php', vm.datos)
+					.success(function(res){
+					console.log(res);	
+				});
+			}
+		}
+	</script>
+</body>
+</html>

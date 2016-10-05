@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>RootScope y Parent AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="app" ng-controller="PruebaAppController">
+		{{scopeNormal}}
+		<br />
+		{{scopeRaiz}}
+		<br />
+		{{algo}} --- {{$parent.algo}}	
+	</div>
+	
+	<script type="text/javascript">
+	angular
+		.module("app", [])
+		.controller('PruebaAppController', function($scope, $rootScope){
+			$scope.scopeNormal = "Esto lo coloco en el scope normal de este controlador...";
+			$rootScope.scopeRaiz = "Esto está en el scope Raiz...";
+			
+			
+			// sobreescribo una variable del scope
+			$scope.algo = "Algo en el scope normal";
+			$rootScope.algo = "Algo en el scope raiz...";		
+		});	
+	</script>
+	
+</body>
+</html>

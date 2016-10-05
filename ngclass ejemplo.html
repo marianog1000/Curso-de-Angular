@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
+    <style type="text/css">
+		.negativo{
+			color:red;
+		}
+		.positivo{
+			color:#33f;
+		}
+		.titularpeq{
+			font-size:10pt;
+		}
+		.titulargran{
+			font-size:18pt;
+		}
+		.uno
+		{
+			background-color:#666;
+		}
+		.dos
+		{
+			color:#fff;	
+		}
+		.tres
+		{
+			font-size:30px;	
+		}
+    
+    </style>
+</head>
+<body>
+	<div ng-app="acumuladorApp" ng-controller="acumuladorAppCtrl as vm">
+	  <h1 ng-class="vm.tamTitular">Acumulador</h1>
+	  <select ng-model="vm.tamTitular">
+		<option value="titularpeq">Peque</option>
+		<option value="titulargran">Gran</option>
+	  </select>	  
+	  <h2 ng-class="vm.clases">Control de operación:</h2>
+	  ¿Cuánto? <input type="text" ng-model="vm.cuanto" size="4" placeholder="0" />
+	  <br />
+	  <input type="button" value="+" ng-click="vm.sumar()"/>
+	  <input type="button" value="-" ng-click="vm.restar()"/>
+	  <h2 ng-show="vm.total<0">Pérdidas:</h2>
+	  <h2 ng-show="vm.total>0">Ganancias:</h2>
+	  <p ng-class="{positivo: vm.total>=0, negativo: vm.total<0}">
+		En el acumulador llevamos <span>{{vm.total}}</span>
+	  </p>  
+	</div>
+	
+	<script type="text/javascript">
+		angular
+			.module('acumuladorApp', [])
+			.controller("acumuladorAppCtrl", controladorPrincipal);
+
+		function controladorPrincipal() {
+			//esta función es mi controlador
+			var scope = this;
+			scope.total = 0;
+			scope.tamTitular = "titularpeq";
+			scope.clases = ["uno", "dos", "tres"];
+			
+			scope.sumar = function() {
+				var cantidad = parseInt(scope.cuanto);
+				if (!isNaN(cantidad)) {
+					scope.total += cantidad;
+				}
+			}
+			scope.restar = function() {
+				var cantidad = parseInt(scope.cuanto);
+				if (!isNaN(cantidad)) {
+					scope.total -= cantidad;
+				}
+			}
+		};
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+    <title>Then</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
+</head>
+<body ng-app="paisesApp" ng-controller="PaisesAppController">
+	
+	<h1>Países del Mundo</h1>
+	<p>
+		Vamos a usar el servicio web llamado "Rest Countries".
+		<a href="https://restcountries.eu/">Restcountries.eu</a>	
+	</p>
+	<p>
+		La URL <a href="https://restcountries.eu/rest/v1/all">https://restcountries.eu/rest/v1/all</a>
+		Devuelve todos los países del mundo.
+	</p>
+	<div ng-show="paises.length==0">Cargando Países...</div>
+	<h2 ng-show="paises.length">Se encontraron {{paises.length}} en el mundo</h2>
+	<ol>
+		<li ng-repeat="pais in paises">{{pais.name}} - {{pais.capital}}</li>
+	</ol>
+	
+	
+	
+	<script type="text/javascript">
+		angular
+			.module('paisesApp', [])
+			.controller("PaisesAppController",['$scope','$http', function($scope,$http){ 
+			
+			$scope.paises = [];
+			$http.get("https://restcountries.eu/rest/v1/all")
+				.then(function(res){
+					$scope.paises = res.data;},
+					function(res){
+						$scope.paises = [{name: "Error!! " + res.status}];
+					});
+		
+		}]);
+	</script>
+</body>
+</html>

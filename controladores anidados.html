@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Controladores Anidados AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+    <style>
+		.rojo b
+		{
+			color: Red;	
+		}
+    </style>
+</head>
+<body ng-app="app">
+	
+	<section ng-controller="sectionCtrl">
+		<p>{{scopeSection}}</p>
+		<p>Manual: <b>{{nombre}}</b></p>
+		
+		<article ng-controller="articleCtrl">
+			{{scopeArticle}}
+			<p>Si quiero, puedo acceder al scope del elemento padre: <b>{{scopeSection}}</b></p>
+			<p>También puede acceder al scope padre con $parent <b>{{$parent.scopeSection}}</b></p>
+			
+			<br /><br />
+			Articulo: {{nombre}}
+			<p>Este artículo pertenece al Manual: <b>{{$parent.nombre}}</b></p>
+			
+			<p ng-controller="comentariosCtrl" class="rojo">
+				Este comentario lo escribe <b>{{nombre}}</b><br />
+				Pertenece al artículo <b>{{$parent.nombre}}</b><br />
+				Que a su vez pertenece al manual<b> {{$parent.$parent.nombre}}</b><br />
+			</p>			
+		</article>	
+	</section>
+	
+	
+	
+	<script type="text/javascript">
+		angular
+			.module("app", [])
+			.controller('sectionCtrl', sectionController)
+			.controller('articleCtrl', articleController)
+			.controller('comentariosCtrl', comentariosController);
+
+		function sectionController($scope) {
+
+			$scope.scopeSection = "Este es un elemento del section";
+			$scope.nombre = "Kapeluz";
+		}
+
+		function articleController($scope) {
+			$scope.scopeArticle = "Este es un elemento del article";
+			$scope.nombre = "Biología";
+		}
+		
+		function comentariosController($scope){
+			$scope.nombre = "mariano";
+		}	
+		
+	</script>
+	
+</body>
+</html>

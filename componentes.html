@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>Componentes AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+</head>
+<body ng-app="app">
+	
+	<probando-component></probando-component>
+	
+	
+	<script type="text/javascript">
+		angular
+			.module("app", [])
+			.component('probandoComponent', {
+				template: [
+					'<div class="miclase">',
+					'<span>Esto es algo de HTML en el componente.</span>',
+					'<b>Angular Rules!</b>',
+					'</div>'
+				].join('')			
+			});		
+	</script>	
+</body>
+</html>

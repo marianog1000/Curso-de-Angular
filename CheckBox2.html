@@ -1,0 +1,71 @@
+﻿<!DOCTYPE>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+    <title>Trabajando con Checkboxes Angular JS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
+        <style type="text/css">
+			.claro{
+				color:#33f;
+				background-color:Gray;
+			}
+			.oscuro{
+				color:red;
+				background-color:#000;
+				text-decoration:underline;
+				font-family:Verdana;
+			}
+			.grande
+			{
+				font-size:14pt;	
+				text-decoration:underline;
+				color:Blue;
+			}
+			.chico
+			{
+				font-size:10pt;	
+			}	
+		</style>
+
+    
+</head>
+<body ng-app="app" ng-controller="appCtrl as vm">
+	
+	<p>
+		<div ng-class="vm.clase">
+			<input type="checkbox" ng-model="vm.activo" ng-change="vm.avisar()" />
+			Este campo es vm.activo y su valor en el modelo es {{vm.activo}}.
+			<br />
+			Tiene además un ng-change asociado con el método vm.avisar().
+		</div>
+	</p>
+	<p>
+		<div ng-class="vm.clarooscuro">
+			<input type="checkbox" ng-model="vm.clarooscuro" ng-true-value="'claro'" ng-false-value="'oscuro'" />
+			Este campo tiene el value modificado. Ahora vale {{vm.clarooscuro}}.	
+		</div>
+	</p>
+	<p>
+		<input type="button" ng-click="vm.activo=true" value="pulsa para cambiar la propiedad del modelo del primer checkbox a true" />
+		Observarás que aunque el estado pueda cambiar, no se invoca al ng-change de ese primer checkbox.	
+	</p>
+	
+	
+	<script type="text/javascript">
+		var app = angular.module('app', [])
+		app.controller("appCtrl", function() {
+
+			var vm = this;
+			vm.avisar = function() {
+				if (vm.activo) {
+					vm.clase = "chico";
+				} else {
+					vm.clase = "grande";
+				}
+			}
+		});
+	
+	</script>
+</body>
+</html>

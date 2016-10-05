@@ -1,0 +1,79 @@
+﻿<!doctype>
+<html>
+<head>
+  <title>Fabricas como Servicios</title>
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
+ 
+</head>
+<!--<body ng-app="miAp">-->
+<body>
+
+<div ng-app="acumuladorApp" ng-controller="acumuladorAppCtrl as vm">
+  <h1>Acumulador</h1>
+  <h2>Control de operación:</h2>
+  ¿Cuánto? <input type="text" ng-model="vm.cuanto" size="4" />
+  <br />
+  <input type="button" value="+" ng-click="vm.sumar()"/>
+  <input type="button" value="-" ng-click="vm.restar()"/>
+  <h2>Totales:</h2>
+  En el acumulador llevamos <span>{{vm.total}}</span>
+</div>
+
+<!--<div ng-app="acumuladorApp" ng-controller="acumuladorAppCtrl">
+  <h1>Acumulador</h1>
+  <h2>Control de operación:</h2>
+  ¿Cuánto? <input type="text" ng-model="cuanto" size="4" />
+  <br />
+  <input type="button" value="+" ng-click="sumar()"/>
+  <input type="button" value="-" ng-click="restar()"/>
+  <h2>Totales:</h2>
+  En el acumulador llevamos <span>{{total}}</span>
+</div>-->
+
+<script type="text/javascript">
+	/*angular
+	  .module('pruebaApp', [])
+	  .controller("pruebaAppCtrl", function() {
+	  	this.algo = "Esto funciona! Gracias Angular";
+	  });
+	angular
+	  .module('pruebaApp', [])
+	  .controller('pruebaAppCtrl', ['$scope', function($scope) {
+	  	$scope.algo = "Hola Angular, usando controller!";
+	  } ]);*/
+	angular
+	  .module('acumuladorApp', [])
+	  .controller("acumuladorAppCtrl", controladorPrincipal);
+	function controladorPrincipal() {
+		//esta función es mi controlador
+		var scope = this;
+		scope.total = 0;
+		scope.cuanto = 0;
+		scope.sumar = function() {
+			scope.total += parseInt(scope.cuanto);
+		}
+		scope.restar = function() {
+			scope.total -= parseInt(scope.cuanto);
+		}
+	};
+	/*var acumuladorApp = angular.module('acumuladorApp', []);
+	acumuladorApp.controller("acumuladorAppCtrl", ["$scope", function($scope) {
+		//esta función es mi controlador
+		//var $scope = this;
+		$scope.total = 0;
+		$scope.cuanto = 0;
+
+		$scope.sumar = function() {
+			$scope.total += parseInt($scope.cuanto);
+		}
+		$scope.restar = function() {
+			$scope.total -= parseInt($scope.cuanto);
+		}
+	} ]);*/
+</script>
+
+</body>
+</html>
+

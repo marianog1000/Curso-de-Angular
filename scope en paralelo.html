@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <title>RootScope y Parent AngularJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+</head>
+<body ng-app="app">
+	
+	<header ng-controller="headerCtrl as hd">
+		{{hd.scopeHeader}}	
+	</header>
+	<section ng-controller="sectionCtrl as sec">
+		{{sec.scopeSection}}
+	</section>
+	
+	
+	
+	<script type="text/javascript">
+		angular
+			.module("app", [])
+			.controller('headerCtrl', headerController)
+			.controller('sectionCtrl', sectionController);
+
+		function headerController() {
+			var hd = this;
+			hd.scopeHeader = "Este es un elemento del Header";
+		}
+		
+		function sectionController(){
+			var sec = this;
+			sec.scopeSection = "Este es un elemento del Section";		
+		}		
+		
+	</script>
+	
+</body>
+</html>
